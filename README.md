@@ -1,97 +1,69 @@
-# Spring Boot JPA MySQL - Building Rest CRUD API example
+We will build a Spring Boot JPA Rest CRUD API for a Tutorial application in that:
 
-For more detail, please visit:
-> [Spring Boot JPA + MySQL - Building Rest CRUD API example](https://www.bezkoder.com/spring-boot-jpa-crud-rest-api/)
+Each Tutotial has id, title, description, published status.
+Apis help to create, retrieve, update, delete Tutorials.
+Apis also support custom finder methods such as find by published status or by title.
 
-> [Spring Boot JPA + PostgreSQL - Building Rest CRUD API example](https://www.bezkoder.com/spring-boot-postgresql-example/)
+TECHNOLOGY:
+Java 8
+Spring Boot 2.2.1 (with Spring Web MVC, Spring Data JPA)
+PostgreSQL/MySQL
+Maven 3.6.1
 
-Front-end that works well with this Back-end
-> [Angular 8 Client](https://www.bezkoder.com/angular-crud-app/)
+Use Spring web tool or your development tool (Spring Tool Suite, Eclipse, Intellij) to create a Spring Boot project.
 
-> [Angular 10 Client](https://www.bezkoder.com/angular-10-crud-app/)
+Then open pom.xml and add these dependencies:
 
-> [Angular 11 Client](https://www.bezkoder.com/angular-11-crud-app/)
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
 
-> [Angular 12 Client](https://www.bezkoder.com/angular-12-crud-app/)
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+We also need to add one more dependency.
+– If you want to use MySQL:
+<dependency>
+	<groupId>mysql</groupId>
+	<artifactId>mysql-connector-java</artifactId>
+	<scope>runtime</scope>
+</dependency>
 
-> [Angular 13 Client](https://www.bezkoder.com/angular-13-crud-example/)
 
-> [Angular 14 Client](https://www.bezkoder.com/angular-14-crud-example/)
+Under src/main/resources folder, open application.properties and write these lines.
 
-> [Vue 2 Client](https://www.bezkoder.com/vue-js-crud-app/)
+– For MySQL:
 
-> [Vue 3 Client](https://www.bezkoder.com/vue-3-crud/)
+spring.datasource.url= jdbc:mysql://localhost:3306/testdb?useSSL=false
+spring.datasource.username= root
+spring.datasource.password= 123456
 
-> [Vuetify Client](https://www.bezkoder.com/vuetify-data-table-example/)
+spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.MySQL5InnoDBDialect
 
-> [React Client](https://www.bezkoder.com/react-crud-web-api/)
+# Hibernate ddl auto (create, create-drop, validate, update)
+spring.jpa.hibernate.ddl-auto= update
 
-> [React Redux Client](https://www.bezkoder.com/react-redux-crud-example/)
 
-More Practice:
-> [Spring Boot File upload example with Multipart File](https://www.bezkoder.com/spring-boot-file-upload/)
+Our Data model is Tutorial with four fields: id, title, description, published.
+In model package, we define Tutorial class.
 
-> [Spring Boot Pagination & Filter example | Spring JPA, Pageable](https://www.bezkoder.com/spring-boot-pagination-filter-jpa-pageable/)
+model/Tutorial.java
 
-> [Spring Data JPA Sort/Order by multiple Columns | Spring Boot](https://www.bezkoder.com/spring-data-sort-multiple-columns/)
 
-> [Spring Boot Repository Unit Test with @DataJpaTest](https://www.bezkoder.com/spring-boot-unit-test-jpa-repo-datajpatest/)
+Create Repository Interface
+Let’s create a repository to interact with Tutorials from the database.
+In repository package, create TutorialRepository interface that extends JpaRepository.
 
-Associations:
-> [Spring Boot One To Many example with Spring JPA, Hibernate](https://www.bezkoder.com/jpa-one-to-many/)
+repository/TutorialRepository.java
 
-> [Spring Boot Many To Many example with Spring JPA, Hibernate](https://www.bezkoder.com/jpa-many-to-many/)
 
-Security:
-> [Spring Boot + Spring Security JWT Authentication & Authorization](https://www.bezkoder.com/spring-boot-jwt-authentication/)
+Create Spring Rest APIs Controller
+Finally, we create a controller that provides APIs for creating, retrieving, updating, deleting and finding Tutorials.
 
-Deployment:
-> [Deploy Spring Boot App on AWS – Elastic Beanstalk](https://bezkoder.com/deploy-spring-boot-aws-eb/)
+controller/TutorialController.java
 
-> [Docker Compose Spring Boot and MySQL example](https://www.bezkoder.com/docker-compose-spring-boot-mysql/)
+Run Spring Boot application with command: mvn spring-boot:run.
 
-Fullstack:
-> [Vue.js + Spring Boot + MySQL example](https://bezkoder.com/spring-boot-vue-js-mysql/)
-
-> [Vue.js + Spring Boot + PostgreSQL example](https://bezkoder.com/spring-boot-vue-js-postgresql/)
-
-> [Angular 10 + Spring Boot + MySQL example](https://www.bezkoder.com/angular-10-spring-boot-crud/)
-
-> [Angular 11 + Spring Boot + MySQL example](https://www.bezkoder.com/angular-11-spring-boot-crud/)
-
-> [Angular 12 + Spring Boot + MySQL example](https://bezkoder.com/angular-12-spring-boot-mysql/)
-
-> [Angular 13 + Spring Boot + MySQL example](https://www.bezkoder.com/spring-boot-angular-13-mysql/)
-
-> [Angular 14 + Spring Boot + MySQL example](https://www.bezkoder.com/spring-boot-angular-14-mysql/)
-
-> [Angular 10 + Spring Boot + PostgreSQL example](https://www.bezkoder.com/angular-10-spring-boot-postgresql/)
-
-> [Angular 11 + Spring Boot + PostgreSQL example](https://www.bezkoder.com/angular-11-spring-boot-postgresql/)
-
-> [Angular 12 + Spring Boot + PostgreSQL example](https://bezkoder.com/angular-12-spring-boot-postgresql/)
-
-> [Angular 13 + Spring Boot + PostgreSQL example](https://www.bezkoder.com/spring-boot-angular-13-postgresql/)
-
-> [Angular 14 + Spring Boot + PostgreSQL example](https://www.bezkoder.com/spring-boot-angular-14-postgresql/)
-
-> [Angular 13 + Spring Boot + H2 Embedded Database example](https://www.bezkoder.com/spring-boot-angular-13-crud/)
-
-> [Angular 14 + Spring Boot + H2 Embedded Database example](https://www.bezkoder.com/spring-boot-angular-14-crud/)
-
-> [React + Spring Boot + MySQL example](https://www.bezkoder.com/react-spring-boot-crud/)
-
-> [React + Spring Boot + PostgreSQL example](https://www.bezkoder.com/spring-boot-react-postgresql/)
-
-Run both Back-end & Front-end in one place:
-> [Integrate Angular with Spring Boot Rest API](https://www.bezkoder.com/integrate-angular-spring-boot/)
-
-> [Integrate React.js with Spring Boot Rest API](https://www.bezkoder.com/integrate-reactjs-spring-boot/)
-
-> [Integrate Vue.js with Spring Boot Rest API](https://www.bezkoder.com/integrate-vue-spring-boot/)
-
-## Run Spring Boot application
-```
-mvn spring-boot:run
-```
-
+tutorials table will be automatically generated in Database.
